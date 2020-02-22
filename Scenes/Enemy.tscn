@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://Scripts/Player.gd" type="Script" id=1]
-[ext_resource path="res://Sprites/Player-plane.png" type="Texture" id=2]
-[ext_resource path="res://Sounds/Shoot1.wav" type="AudioStream" id=3]
+[ext_resource path="res://Scripts/Enemy.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/Enemy-plane.png" type="Texture" id=2]
+[ext_resource path="res://Sounds/Shoot2.wav" type="AudioStream" id=4]
 
 [sub_resource type="Animation" id=1]
 resource_name = "PlayerAnimation"
@@ -22,20 +22,20 @@ tracks/0/keys = {
 }
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 25.9319, 17.4275 )
+extents = Vector2( 32.3222, 23.6813 )
 
-[node name="Player" type="Node2D"]
+[node name="Enemy" type="Node2D" groups=[
+"enemy",
+]]
 script = ExtResource( 1 )
-gravity = 150.0
-min_input_strength = -40.0
-max_input_strength = -2.0
-input_strength_multiplier = 32.0
-max_position = 480.0
+min_height = 20.0
+max_height = 460.0
 
 [node name="Sprite" type="Sprite" parent="."]
 scale = Vector2( 2, 2 )
 texture = ExtResource( 2 )
 hframes = 8
+frame = 7
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "PlayerAnimation"
@@ -44,15 +44,15 @@ anims/PlayerAnimation = SubResource( 1 )
 
 [node name="ShootTimer" type="Timer" parent="."]
 process_mode = 0
-wait_time = 0.5
+wait_time = 1.25
 autostart = true
 
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2( 0, 5.25725 )
+position = Vector2( 0, 5.53395 )
 shape = SubResource( 2 )
 
 [node name="ShootStream" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 3 )
-volume_db = -5.0
+stream = ExtResource( 4 )
+volume_db = -10.0

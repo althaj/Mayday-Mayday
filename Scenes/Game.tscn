@@ -1,11 +1,19 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/Game.gd" type="Script" id=2]
+[ext_resource path="res://Font/Jet Pilot Regular.ttf" type="DynamicFontData" id=4]
 
 [sub_resource type="AudioStreamMicrophone" id=1]
 
-[node name="Game" type="Node2D"]
+[sub_resource type="DynamicFont" id=2]
+size = 64
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 28
+font_data = ExtResource( 4 )
+
+[node name="Game" type="Node"]
 script = ExtResource( 2 )
 
 [node name="AudioStreamRecord" type="AudioStreamPlayer" parent="."]
@@ -13,5 +21,110 @@ stream = SubResource( 1 )
 autoplay = true
 bus = "Record"
 
-[node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 100, 240 )
+[node name="EnemySpawnTimer" type="Timer" parent="."]
+wait_time = 2.0
+
+[node name="GameOverTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="BackgroundColor" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.694118, 0.929412, 0.960784, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GameLayer" type="CanvasLayer" parent="."]
+
+[node name="UILayer" type="CanvasLayer" parent="."]
+
+[node name="UI" type="Control" parent="UILayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GameOver" type="Control" parent="UILayer/UI"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UILayer/UI/GameOver"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="UILayer/UI/GameOver/VBoxContainer"]
+margin_top = 200.0
+margin_right = 1024.0
+margin_bottom = 248.0
+
+[node name="Label" type="Label" parent="UILayer/UI/GameOver/VBoxContainer/CenterContainer"]
+margin_left = 390.0
+margin_right = 634.0
+margin_bottom = 64.0
+custom_fonts/font = SubResource( 2 )
+text = "You crashed"
+
+[node name="CenterContainer2" type="CenterContainer" parent="UILayer/UI/GameOver/VBoxContainer"]
+margin_top = 252.0
+margin_right = 1024.0
+margin_bottom = 280.0
+
+[node name="Label" type="Label" parent="UILayer/UI/GameOver/VBoxContainer/CenterContainer2"]
+margin_left = 428.0
+margin_right = 595.0
+margin_bottom = 28.0
+custom_fonts/font = SubResource( 3 )
+text = "Scream to restart"
+
+[node name="NewGame" type="Control" parent="UILayer/UI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UILayer/UI/NewGame"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/separation = 32
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="UILayer/UI/NewGame/VBoxContainer"]
+margin_top = 162.0
+margin_right = 1024.0
+margin_bottom = 226.0
+
+[node name="Label" type="Label" parent="UILayer/UI/NewGame/VBoxContainer/CenterContainer"]
+margin_left = 371.0
+margin_right = 652.0
+margin_bottom = 64.0
+custom_fonts/font = SubResource( 2 )
+text = "MAYDAY MAYDAY"
+
+[node name="CenterContainer2" type="CenterContainer" parent="UILayer/UI/NewGame/VBoxContainer"]
+margin_top = 258.0
+margin_right = 1024.0
+margin_bottom = 317.0
+
+[node name="Label" type="Label" parent="UILayer/UI/NewGame/VBoxContainer/CenterContainer2"]
+margin_left = 291.0
+margin_right = 732.0
+margin_bottom = 59.0
+custom_fonts/font = SubResource( 3 )
+text = "Control your plane by screaming into microphone.
+Scream now to start."
+align = 1
