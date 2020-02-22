@@ -17,7 +17,8 @@ _global_script_class_icons={
 
 config/name="Mayday Mayday"
 run/main_scene="res://Scenes/Game.tscn"
-config/icon="res://icon.png"
+config/icon="res://Sprites/Player-plane-icon.png"
+config/windows_native_icon="res://Sprites/Player-plane.ico"
 
 [audio]
 
